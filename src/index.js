@@ -1,5 +1,3 @@
-
-
 document.addEventListener("DOMContentLoaded", () => {
     fetch("https://dog.ceo/api/breeds/image/random/4")
         .then(function(response) {
@@ -21,10 +19,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
-function changeDogs(event) {
-    let x = document.getElementsByTagName("li")
-    for (const i in x) {
-        console.log(i)
+let breedsElements = []
+
+function changeDogs(e) {
+    let breedsList = document.getElementById("dog-breeds")
+    breedsList.innerHTML = ""
+
+    let array = e.target.value == "all" ? breedsElements : breedsElements.filter(x => x.innerHTML.startsWith(e.target.value))
+
+    for (i of array) {
+        listDiv.appendChild(i)
     }
 }
 
@@ -50,8 +54,13 @@ function addBreeds(object) {
             breed.style.color = '#' + Math.floor(Math.random() * 16777215).toString(16)
         })
 
-        let breedList = document.getElementById("dog-breeds")
-        breedList.appendChild(breed)
+        let breedsList = document.getElementById("dog-breeds")
+        breedsList.appendChild(breed)
+    }
+
+    elements = document.getElementsByTagName("li")
+    for (i of elements) {
+        breedsElements.push(i)
     }
 }
 
